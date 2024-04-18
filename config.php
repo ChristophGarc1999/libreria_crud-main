@@ -12,16 +12,16 @@ server with default setting (user 'root' with no password) */
 define('DB_SERVER', '127.0.0.1');
 define('DB_USERNAME', 'root');
 define('DB_PASSWORD', 'M0t0rh34d1');
-define('DB_PORT','3306');
+define('DB_PORT', '3306');
 
 // Definir DB_NAME basado en $_SESSION["db"]
 define('DB_NAME', $db);
 
 /* Attempt to connect to MySQL database */
 $link = mysqli_connect(DB_SERVER, DB_USERNAME, DB_PASSWORD, DB_NAME, DB_PORT);
- 
+
 // Check connection
-if($link === false){
+if ($link === false) {
     die("ERROR: Could not connect. " . mysqli_connect_error());
 }
 ?>

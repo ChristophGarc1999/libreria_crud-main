@@ -1,9 +1,11 @@
 <?php
 session_start();
-
 // Include config file
 require_once "config.php";
 
+// Transacciones
+$jsonInsert='"user": "Christopher", "date":"'.date('Y-m-d H:i:s').'", "secction": "update.php" ';
+require "transactions.php";
 // Define variables and initialize with empty values
 $field_values = array();
 $errors = array();

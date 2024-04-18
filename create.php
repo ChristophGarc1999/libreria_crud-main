@@ -3,6 +3,8 @@
 session_start();
 require_once "config.php";
 
+$jsonInsert='"user": "Christopher", "date":"'.date('Y-m-d H:i:s').'", "secction": "create.php" ';
+require "transactions.php";
 // Obtener el nombre de la tabla seleccionada por el usuario
 $table = $_GET['table'] ?? '';
 
@@ -46,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql .= ") VALUES (";
         $sql .= "'" . implode("', '", $field_values) . "'";
         $sql .= ")";
-        
+
         // Ejecutar la declaración preparada
         if (mysqli_query($link, $sql)) {
             // Redirigir a la página de inicio
@@ -61,17 +63,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>Agregar <?php echo ucfirst($table); ?></title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
-        .wrapper{
+        .wrapper {
             width: 500px;
             margin: 0 auto;
         }
     </style>
 </head>
+
 <body>
     <div class="wrapper">
         <div class="container-fluid">
@@ -80,12 +84,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="page-header">
                         <h2>Agregar <?php echo ucfirst($table); ?></h2>
                     </div>
-                    <p>Favor de llenar el siguiente formulario para agregar un registro a la tabla <?php echo ucfirst($table); ?>.</p>
-                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?table=$table"; ?>" method="post">
+                    <p>Favor de llenar el siguiente formulario para agregar un registro a la tabla
+                        <?php echo ucfirst($table); ?>.
+                    </p>
+                    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]) . "?table=$table"; ?>"
+                        method="post">
                         <?php foreach ($fields as $field): ?>
                             <div class="form-group <?php echo (!empty($errors[$field])) ? 'has-error' : ''; ?>">
                                 <label><?php echo ucfirst($field); ?></label>
-                                <input type="text" name="<?php echo $field; ?>" class="form-control" value="<?php echo $field_values[$field]; ?>">
+                                <input type="text" name="<?php echo $field; ?>" class="form-control"
+                                    value="<?php echo $field_values[$field]; ?>">
                                 <span class="help-block"><?php echo $errors[$field]; ?></span>
                             </div>
                         <?php endforeach; ?>
@@ -93,8 +101,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <a href="index.php" class="btn btn-default">Cancelar</a>
                     </form>
                 </div>
-            </div>        
+            </div>
         </div>
     </div>
 </body>
+
 </html>
